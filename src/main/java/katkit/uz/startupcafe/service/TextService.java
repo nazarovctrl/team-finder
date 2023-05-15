@@ -1,10 +1,11 @@
-package katkit.uz.startupcafe.service.bot;
+package katkit.uz.startupcafe.service;
 
 import katkit.uz.startupcafe.enums.SentenceKey;
 import katkit.uz.startupcafe.enums.Step;
 import katkit.uz.startupcafe.service.ButtonService;
 import katkit.uz.startupcafe.service.ProfileService;
 import katkit.uz.startupcafe.service.SentenceService;
+import katkit.uz.startupcafe.service.bot.SendingService;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

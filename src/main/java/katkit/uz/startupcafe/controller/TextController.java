@@ -5,7 +5,7 @@ import katkit.uz.startupcafe.enums.ProfileRole;
 import katkit.uz.startupcafe.enums.Step;
 import katkit.uz.startupcafe.service.ProfileService;
 import katkit.uz.startupcafe.service.SentenceService;
-import katkit.uz.startupcafe.service.bot.TextService;
+import katkit.uz.startupcafe.service.TextService;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.objects.Message;
 
