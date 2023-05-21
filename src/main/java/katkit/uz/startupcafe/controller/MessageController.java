@@ -11,7 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Component
 public class MessageController {
-
     private final ProfileChatService profileChatService;
     private final AttachService attachService;
     private final ProfileService profileService;
@@ -39,14 +38,10 @@ public class MessageController {
             return;
         }
 
-        if (message.hasText() && (message.getText().equals("/start") ||
-                message.getText().equals("/help") ||
-                message.getText().equals("/language"))) {
-
+        if (message.hasText() && (message.getText().equals("/start") || message.getText().equals("/help") || message.getText().equals("/language"))) {
             textController.replyToBotCommand(message);
             return;
         }
-
 
         if (!profileChatService.checkSubscription(message.getFrom().getId())) {
             return;
@@ -59,6 +54,7 @@ public class MessageController {
 
         if (message.hasContact()) {
             Step step = profileService.getStep(message.getChatId());
+
             if (step.equals(Step.SIGN_UP_CONTACT)) {
                 signUpController.handleContact(message);
                 return;
@@ -72,6 +68,7 @@ public class MessageController {
 
         if (message.hasPhoto()) {
             Step step = profileService.getStep(message.getChatId());
+
             if (step != null && step.equals(Step.PROJECT_CREATE_ATTACH)) {
                 attachService.savePhoto(message);
                 return;
@@ -80,6 +77,7 @@ public class MessageController {
 
         if (message.hasVideo()) {
             Step step = profileService.getStep(message.getChatId());
+
             if (step != null && step.equals(Step.PROJECT_CREATE_ATTACH)) {
                 attachService.saveVideo(message);
             }

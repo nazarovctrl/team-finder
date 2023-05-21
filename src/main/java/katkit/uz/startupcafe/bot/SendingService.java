@@ -22,22 +22,18 @@ public class SendingService {
     }
 
     public void sendMessage(SendDocument sendDocument) {
-
         try {
             telegramBot.execute(sendDocument);
         } catch (TelegramApiException e) {
             log.error(e.getMessage());
-
         }
     }
 
     public void sendMessage(SendPhoto sendPhoto) {
-
         try {
             telegramBot.execute(sendPhoto);
         } catch (TelegramApiException e) {
             log.error(e.getMessage());
-
         }
     }
 

@@ -45,10 +45,12 @@ public class PostController {
             postService.sendPoll(message.getPoll(), message.getChatId());
             return;
         }
+
         if (message.hasAudio()) {
             postService.sendAudio(message.getAudio(), message.getCaption());
             return;
         }
+
         if (message.hasVoice()) {
             postService.sendVoice(message.getVoice(), message.getCaption());
             return;
@@ -58,7 +60,6 @@ public class PostController {
             postService.sendAnimation(message.getAnimation(), message.getCaption());
             return;
         }
-
 
         if (message.hasDocument()) {
             postService.sendDocument(message.getDocument(), message.getCaption());
@@ -72,6 +73,7 @@ public class PostController {
 
         if (message.hasContact()) {
             postService.send(message);
+            return;
         }
 
     }

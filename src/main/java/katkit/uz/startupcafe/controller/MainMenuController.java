@@ -7,7 +7,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Component
 public class MainMenuController {
-
     private final SentenceService sentenceService;
     private final ProjectService projectService;
     private final ProjectPagingService projectPagingService;
@@ -30,25 +29,11 @@ public class MainMenuController {
         Long chatId = message.getChatId();
 
         switch (buttonKey) {
-            case PROJECTS -> {
-                projectPagingService.getProjectPage(chatId);
-                return;
-            }
-            case OFFICE -> {
-                officeService.toOffice(chatId);
-            }
-            case PROJECT_FIND -> {
-                projectService.findProject(chatId);
-                return;
-            }
-            case SIGN_UP -> {
-                signUpService.signUp(chatId);
-                return;
-            }
-            case PROFILE -> {
-                cabinetService.toCabinet(chatId);
-            }
-
+            case PROJECTS -> projectPagingService.getProjectPage(chatId);
+            case OFFICE -> officeService.toOffice(chatId);
+            case PROJECT_FIND -> projectService.findProject(chatId);
+            case SIGN_UP -> signUpService.signUp(chatId);
+            case PROFILE -> cabinetService.toCabinet(chatId);
         }
     }
 }

@@ -8,12 +8,9 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class OfficeController {
-
-
     private final ProjectService projectService;
     private final SentenceService sentenceService;
     private final ProjectPagingService projectPagingService;
-
 
     public OfficeController(ProjectService projectService, SentenceService sentenceService, ProjectPagingService projectPagingService) {
         this.projectService = projectService;
@@ -28,11 +25,8 @@ public class OfficeController {
         if (buttonKey != null) {
             switch (buttonKey) {
                 case MY_PROJECT -> projectPagingService.getMyProjectPage(chatId);
-
                 case PROJECT_CREATE -> projectService.toCreateProject(chatId);
-
                 case PROJECT_JOINED -> projectPagingService.getJoinedProjectPage(chatId);
-
             }
         }
 

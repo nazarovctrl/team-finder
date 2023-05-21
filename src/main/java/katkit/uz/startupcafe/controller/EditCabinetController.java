@@ -21,13 +21,12 @@ public class EditCabinetController {
         this.localCabinetService = localCabinetService;
     }
 
-
     public void handle(Long chatId, String text) {
         ButtonKey buttonKey = sentenceService.getButtonKey(text);
 
         if (buttonKey != null && buttonKey.equals(ButtonKey.BACK)) {
             Step step = profileService.getStep(chatId);
-            if (step!=null&&step.equals(Step.PROFILE_EDIT)) {
+            if (step != null && step.equals(Step.PROFILE_EDIT)) {
                 localCabinetService.toCabinet(chatId);
                 return;
             }
@@ -37,22 +36,10 @@ public class EditCabinetController {
 
         if (buttonKey != null) {
             switch (buttonKey) {
-                case CHANGE_NAME -> {
-                    localCabinetService.requestName(chatId);
-                    return;
-                }
-                case CHANGE_PHONE -> {
-                    localCabinetService.requestPhone(chatId);
-                    return;
-                }
-                case CHANGE_BIO -> {
-                    localCabinetService.requestBIO(chatId);
-                    return;
-                }
-                case CHANGE_PROFESSION -> {
-                    localCabinetService.requestProfession(chatId);
-                    return;
-                }
+                case CHANGE_NAME -> localCabinetService.requestName(chatId);
+                case CHANGE_PHONE -> localCabinetService.requestPhone(chatId);
+                case CHANGE_BIO -> localCabinetService.requestBIO(chatId);
+                case CHANGE_PROFESSION -> localCabinetService.requestProfession(chatId);
             }
             return;
         }
@@ -60,29 +47,11 @@ public class EditCabinetController {
         Step step = profileService.getStep(chatId);
 
         switch (step) {
-            case PROFILE_EDIT_NAME -> {
-                localCabinetService.changeName(chatId, text);
-                return;
-            }
-
-            case PROFILE_EDIT_PHONE -> {
-                localCabinetService.changePhoneNumber(chatId, text);
-                return;
-            }
-            case PROFILE_EDIT_BIO -> {
-                localCabinetService.changeBIO(chatId, text);
-                return;
-            }
-
-            case PROFILE_EDIT_PROFESSION -> {
-                localCabinetService.changeProfession(chatId, text);
-                return;
-            }
-
-
+            case PROFILE_EDIT_NAME -> localCabinetService.changeName(chatId, text);
+            case PROFILE_EDIT_PHONE -> localCabinetService.changePhoneNumber(chatId, text);
+            case PROFILE_EDIT_BIO -> localCabinetService.changeBIO(chatId, text);
+            case PROFILE_EDIT_PROFESSION -> localCabinetService.changeProfession(chatId, text);
         }
-
-
     }
 
     public void changePhoneNumber(Message message) {

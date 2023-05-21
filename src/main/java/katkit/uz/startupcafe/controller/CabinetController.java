@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class CabinetController {
-
     private final EditCabinetController editCabinetController;
     private final CabinetService localCabinetService;
     private final ProfileService profileService;

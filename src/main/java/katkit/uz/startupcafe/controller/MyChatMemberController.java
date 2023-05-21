@@ -18,15 +18,10 @@ import org.telegram.telegrambots.meta.api.objects.chatmember.ChatMember;
 
 @Component
 public class MyChatMemberController {
-
     @Value("${bot.name}")
     private String botUsername;
-
-
     private final ChatService chatService;
-
     private final SendingService sendingService;
-
     private final SentenceService sentenceService;
     private final ProfileService profileService;
 
@@ -34,7 +29,6 @@ public class MyChatMemberController {
         this.chatService = chatService;
         this.sendingService = sendingService;
         this.sentenceService = sentenceService;
-
         this.profileService = profileService;
     }
 
@@ -71,8 +65,6 @@ public class MyChatMemberController {
     }
 
     private void userChatController(ChatMemberUpdated myChatMember) {
-
-
         ChatRole role = ChatRole.valueOf(myChatMember.getNewChatMember().getStatus().toUpperCase());
         Long userId = myChatMember.getFrom().getId();
 

@@ -26,14 +26,12 @@ public class AdminTextController {
     }
 
     public void handle(String text, Long chatId) {
-
         ButtonKey buttonKey = sentenceService.getButtonKey(text);
 
         if (buttonKey != null && buttonKey.equals(ButtonKey.HOME)) {
             adminTextService.toHomePage(chatId);
             return;
         }
-
 
         if (buttonKey != null) {
             switch (buttonKey) {
@@ -53,9 +51,7 @@ public class AdminTextController {
                     adminTextService.requestPost(chatId);
                     return;
                 }
-
             }
-
         }
 
         Step step = profileService.getStep(chatId);
