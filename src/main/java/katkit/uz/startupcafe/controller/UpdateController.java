@@ -5,7 +5,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 
 @Component
 public class UpdateController {
-
     private final MessageController messageController;
     private final CallBackController callBackController;
     private final MyChatMemberController myChatMemberController;
@@ -28,11 +27,9 @@ public class UpdateController {
             return;
         }
 
-
         if (update.hasMyChatMember()){
             myChatMemberController.handle(update.getMyChatMember());
         }
-
     }
 
 }

@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProjectRepository extends CrudRepository<ProjectEntity, Integer>, PagingAndSortingRepository<ProjectEntity, Integer> {
-
     @Modifying
     @Transactional
     @Query("UPDATE ProjectEntity p " +
@@ -24,9 +23,7 @@ public interface ProjectRepository extends CrudRepository<ProjectEntity, Integer
             "WHERE  p.id =?1")
     void setDescription(Integer id, String description);
 
-
     ProjectEntity findFirstByProfileUserIdOrderByCreatedDateDesc(Long userId);
-
 
     @Modifying
     @Transactional
@@ -42,23 +39,13 @@ public interface ProjectRepository extends CrudRepository<ProjectEntity, Integer
             "WHERE  p.id =?1")
     void setTechnologies(Integer id, String technologies);
 
-
     Page<ProjectEntity> findByProfileUserIdAndStatusAndVisible(Long userid, ProjectStatus status, Pageable pageable, Boolean visible);
-
-//    @Query("select p from ProjectEntity as p " +
-//            " inner join ProfileProjectEntity as pp on p.id=pp.projectId " +
-//            "where pp.profile.userId<>?1 and p.status=?2  and p.visible=?3")
-//    @Query("select p from ProfileProjectEntity as pp  " +
-//            "inner JOIN ProjectEntity p on p.id=pp.projectId " +
-//            "where pp.profile.userId<>?1 and p.status=?2 and p.visible=?3")
 
     @Query("select p from ProjectEntity as p " +
             "where p.profile.userId<>?1 and  ?2 not in elements( p.partnerList)  and p.status=?3  and p.visible=?4")
     Page<ProjectEntity> findByProfileUserIdAndStatusAndVisible(Long userId, ProfileEntity profile, ProjectStatus status, Boolean visible, Pageable pageable);
 
-
     Page<ProjectEntity> findByStatusAndVisible(ProjectStatus status, Boolean visible, Pageable pageable);
-
 
     Optional<ProjectEntity> findByIdAndVisible(int id, Boolean visible);
 

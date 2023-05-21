@@ -58,12 +58,10 @@ public class AdminTextService {
         String sentence = sentenceService.getSentence(SentenceKey.START_ADMIN, languageCode);
         sendMessage.setText(sentence);
         sendingService.sendMessage(sendMessage);
-
     }
 
 
     public void toHomePage(Long chatId) {
-
         profileService.changeStep(chatId, Step.MAIN);
 
         SendMessage sendMessage = new SendMessage();

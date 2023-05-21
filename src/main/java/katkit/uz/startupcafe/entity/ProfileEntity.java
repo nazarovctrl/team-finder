@@ -14,11 +14,9 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "profile")
 public class ProfileEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     //auto
     @Column
     private Long userId;
@@ -41,8 +39,6 @@ public class ProfileEntity {
 
     @Column
     private Boolean visible = true;
-
-
     //registration
     @Column
     private String name;

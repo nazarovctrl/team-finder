@@ -27,11 +27,12 @@ public class ProfileService {
         this.buttonService = buttonService;
     }
 
-
     public void addUser(User user) {
+
         if (profileRepository.existsByUserId(user.getId())) {
             return;
         }
+
         ProfileEntity profileEntity = new ProfileEntity();
         profileEntity.setUserId(user.getId());
         profileEntity.setUsername(user.getUserName());
@@ -52,12 +53,10 @@ public class ProfileService {
     public void changeLanguage(Long userId, String languageCode, Integer messageId) {
         profileRepository.changeLanguageByUserId(userId, languageCode);
 
-
         DeleteMessage deleteMessage = new DeleteMessage();
         deleteMessage.setChatId(userId);
         deleteMessage.setMessageId(messageId);
         sendingService.sendMessage(deleteMessage);
-
 
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(userId);
@@ -88,15 +87,12 @@ public class ProfileService {
             case OFFICE -> sendMessage.setReplyMarkup(buttonService.getOfficeMarkup(languageCode));
         }
 
-
         sendingService.sendMessage(sendMessage);
-
     }
 
     public boolean isRegistered(Long chatId) {
         return profileRepository.isRegistered(chatId);
     }
-
 
     public void changeStep(Long userId, Step step) {
         profileRepository.changeStep(userId, step);
@@ -123,7 +119,6 @@ public class ProfileService {
     }
 
     public String getInformationByUserId(Long userId) {
-
         ProfileEntity profile = profileRepository.findByUserId(userId);
         String languageCode = profile.getLanguageCode();
 

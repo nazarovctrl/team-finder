@@ -26,7 +26,6 @@ public class AttachService {
     public void saveVideo(Message message) {
         Video video = message.getVideo();
 
-
         ProjectEntity project = projectRepository.findFirstByProfileUserIdOrderByCreatedDateDesc(message.getChatId());
         attachRepository.setFields(project.getId(), video.getFileId(), AttachType.VIDEO);
         projectService.confirmProject(message.getChatId());
@@ -37,6 +36,5 @@ public class AttachService {
         ProjectEntity project = projectRepository.findFirstByProfileUserIdOrderByCreatedDateDesc(message.getChatId());
         attachRepository.setFields(project.getId(), photo.get(photo.size()-1).getFileId(), AttachType.PHOTO);
         projectService.confirmProject(message.getChatId());
-
     }
 }

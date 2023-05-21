@@ -49,13 +49,10 @@ public class ProjectPagingService {
         this.profileService = profileService;
         this.projectService = projectService;
         this.sendingService = sendingService;
-
         this.inlineButtonService = inlineButtonService;
     }
 
-
     private Page<ProjectEntity> getAndCheckPage(Integer messageId, Long chatId, Integer currentPage) {
-
         Page<ProjectEntity> page = getMyPage(chatId, currentPage);
 
         if (page.hasContent()) {
@@ -70,7 +67,6 @@ public class ProjectPagingService {
     }
 
     private Page<ProjectEntity> getAndCheckPageJoin(Integer messageId, Long chatId, Integer currentPage) {
-
         Page<ProjectEntity> page = getJoinedPage(chatId, currentPage);
 
         if (page.hasContent()) {
@@ -104,7 +100,6 @@ public class ProjectPagingService {
         }
 
         projectService.sendProjectInformation(project, chatId, languageCode, markup);
-
     }
 
 
@@ -127,7 +122,6 @@ public class ProjectPagingService {
         List<ProjectEntity> content = all.getContent();
 
         return new PageImpl<>(content, pageable, all.getTotalElements());
-
     }
 
     public Page<ProjectEntity> getAdminPage(int page) {
@@ -138,7 +132,6 @@ public class ProjectPagingService {
         List<ProjectEntity> content = all.getContent();
 
         return new PageImpl<>(content, pageable, all.getTotalElements());
-
     }
 
     public void getProjectPage(Long chatId) {
@@ -152,6 +145,7 @@ public class ProjectPagingService {
             sendingService.sendMessage(sendMessage);
             return;
         }
+
         ProjectEntity project = page.getContent().get(0);
         List<ProjectProfileEntity> projectProfile = projectProfileRepository.findByProjectIdAndProfileUserId(project.getId(), chatId);
 
@@ -184,8 +178,8 @@ public class ProjectPagingService {
             sendingService.sendMessage(sendMessage);
             return;
         }
-        ProjectEntity project = page.getContent().get(0);
 
+        ProjectEntity project = page.getContent().get(0);
         InlineKeyboardMarkup markup;
 
         if (page.getTotalPages() == 1) {
@@ -193,7 +187,6 @@ public class ProjectPagingService {
         } else {
             markup = inlineButtonService.getDeleteAndNextMarkup("/admin/" + 0 + "/" + project.getId(), 1, page.getTotalPages(), languageCode);
         }
-
 
         projectService.sendProjectInformation(project, chatId, languageCode, markup);
     }
@@ -204,7 +197,6 @@ public class ProjectPagingService {
         AttachEntity attach = attachRepository.findByProjectId(project.getId());
         AttachEntity prevAttach = attachRepository.findByProjectId(pId);
         InlineKeyboardMarkup editMarkup = getMyEditMarkup(project.getId(), languageCode, page.getTotalPages(), prevPage);
-
 
         sendEditPage(project, prevAttach, attach, message, languageCode, editMarkup);
     }
@@ -221,6 +213,7 @@ public class ProjectPagingService {
 
 
     private void sendEditPage(ProjectEntity project, AttachEntity prevAttach, AttachEntity attach, Message message, String languageCode, InlineKeyboardMarkup editMarkup) {
+
         if (prevAttach.getType() == null) {
             DeleteMessage deleteMessage = new DeleteMessage();
             deleteMessage.setMessageId(message.getMessageId());
@@ -234,7 +227,6 @@ public class ProjectPagingService {
             EditMessageMedia editMessageMedia = new EditMessageMedia();
             editMessageMedia.setChatId(message.getChatId());
             editMessageMedia.setMessageId(message.getMessageId());
-
 
             InputMedia inputMedia = new InputMediaVideo();
 
@@ -260,13 +252,12 @@ public class ProjectPagingService {
         deleteMessage.setChatId(message.getChatId());
         sendingService.sendMessage(deleteMessage);
         projectService.sendProjectInformation(project, message.getChatId(), languageCode, editMarkup);
-
     }
 
 
     private InlineKeyboardMarkup getMyEditMarkup(Integer projectId, String languageCode, Integer totalPages, Integer currentPage) {
-
         InlineKeyboardMarkup markup = null;
+
         if (totalPages - 1 == currentPage && currentPage == 0) {
             markup = inlineButtonService.getConnectDeleteAndCurrentMarkup("/my/" + currentPage + "/" + projectId, 1 + currentPage, totalPages, languageCode);
         } else if (totalPages - 1 > currentPage && currentPage == 0) {
@@ -277,12 +268,11 @@ public class ProjectPagingService {
             markup = inlineButtonService.getConnectDeleteAndBackMarkup("/my/" + currentPage + "/" + projectId, 1 + currentPage, totalPages, languageCode);
         }
         return markup;
-
     }
 
     private InlineKeyboardMarkup getJoinEditMarkup(Integer projectId, String languageCode, Integer totalPages, Integer currentPage) {
-
         InlineKeyboardMarkup markup = null;
+
         if (totalPages - 1 == currentPage && currentPage == 0) {
             markup = inlineButtonService.getConnectDeleteAndCurrentMarkup("/join/" + currentPage + "/" + projectId, 1 + currentPage, totalPages, languageCode);
         } else if (totalPages - 1 > currentPage && currentPage == 0) {
@@ -293,7 +283,6 @@ public class ProjectPagingService {
             markup = inlineButtonService.getConnectDeleteAndBackMarkup("/join/" + currentPage + "/" + projectId, 1 + currentPage, totalPages, languageCode);
         }
         return markup;
-
     }
 
     private InlineKeyboardMarkup getEditMarkup(Integer projectId, Long userId, String languageCode, Integer totalPages, Integer currentPage) {
@@ -326,7 +315,6 @@ public class ProjectPagingService {
 
     private InlineKeyboardMarkup getAdminEditMarkup(Integer projectId, String languageCode, Integer totalPages, Integer currentPage) {
         InlineKeyboardMarkup markup = null;
-
 
         if (totalPages - 1 == currentPage && currentPage == 0) {
             markup = inlineButtonService.getDeleteAndCurrentMarkup("/admin/" + currentPage + "/" + projectId, 1 + currentPage, totalPages, languageCode);
@@ -361,7 +349,6 @@ public class ProjectPagingService {
     }
 
     public void sendDeleteConfirmAndCancel(String data, CallbackQuery callbackQuery) {
-
         String[] split = data.split("/");
         int pId = Integer.parseInt(split[3]);
         int currantPage = Integer.parseInt(split[2]);
@@ -372,14 +359,15 @@ public class ProjectPagingService {
         editMessageReplyMarkup.setMessageId(message.getMessageId());
         editMessageReplyMarkup.setChatId(message.getChatId());
 
-        if (split[1].equals("my")) {
-            editMessageReplyMarkup.setReplyMarkup(inlineButtonService.getConfirmAndCancelMarkup("/my/" + currantPage + "/" + pId, languageCode));
-        } else if (split[1].equals("join")) {
-            editMessageReplyMarkup.setReplyMarkup(inlineButtonService.getConfirmAndCancelMarkup("/join/" + currantPage + "/" + pId, languageCode));
-        } else if (split[1].equals("admin")) {
-            editMessageReplyMarkup.setReplyMarkup(inlineButtonService.getConfirmAndCancelMarkup("/admin/" + currantPage + "/" + pId, languageCode));
-
+        switch (split[1]) {
+            case "my" ->
+                    editMessageReplyMarkup.setReplyMarkup(inlineButtonService.getConfirmAndCancelMarkup("/my/" + currantPage + "/" + pId, languageCode));
+            case "join" ->
+                    editMessageReplyMarkup.setReplyMarkup(inlineButtonService.getConfirmAndCancelMarkup("/join/" + currantPage + "/" + pId, languageCode));
+            case "admin" ->
+                    editMessageReplyMarkup.setReplyMarkup(inlineButtonService.getConfirmAndCancelMarkup("/admin/" + currantPage + "/" + pId, languageCode));
         }
+
         sendingService.sendMessage(editMessageReplyMarkup);
     }
 
@@ -425,8 +413,6 @@ public class ProjectPagingService {
                 return;
             }
             editAdminPageMessage(pId, page, currentPage, message);
-
-
         } else {
             Optional<ProjectEntity> optional = projectRepository.findById(pId);
             if (optional.isEmpty()) {
@@ -445,8 +431,6 @@ public class ProjectPagingService {
             }
             editJoinPageMessage(pId, page, currentPage, message);
         }
-
-
     }
 
     public void deleteCancelProject(String data, CallbackQuery callbackQuery) {
@@ -466,8 +450,6 @@ public class ProjectPagingService {
             ProjectEntity project = page.getContent().get(0);
             String languageCode = project.getProfile().getLanguageCode();
             editMarkup = getMyEditMarkup(project.getId(), languageCode, page.getTotalPages(), currentPage);
-
-
         } else if (split[1].equals("admin")) {
             page = getAdminPage(currentPage);
             if (page == null) {
@@ -487,13 +469,11 @@ public class ProjectPagingService {
             editMarkup = getJoinEditMarkup(project.getId(), languageCode, page.getTotalPages(), currentPage);
         }
 
-
         EditMessageReplyMarkup editMessageReplyMarkup = new EditMessageReplyMarkup();
         editMessageReplyMarkup.setMessageId(message.getMessageId());
         editMessageReplyMarkup.setChatId(message.getChatId());
         editMessageReplyMarkup.setReplyMarkup(editMarkup);
         sendingService.sendMessage(editMessageReplyMarkup);
-
     }
 
     public void toMyPrevPage(String data, CallbackQuery callbackQuery) {
@@ -536,7 +516,6 @@ public class ProjectPagingService {
         int prevPage = currentPage - 1;
         Message message = callbackQuery.getMessage();
 
-
         Page<ProjectEntity> page = getPage(message.getChatId(), currentPage);
 
         if (!checkPage(page, message.getChatId(), message.getMessageId())) {
@@ -544,7 +523,6 @@ public class ProjectPagingService {
         }
 
         editPageMessage(pId, page, prevPage, message);
-
     }
 
 
@@ -588,16 +566,13 @@ public class ProjectPagingService {
         int nextPage = currentPage + 1;
         Message message = callbackQuery.getMessage();
 
-
         Page<ProjectEntity> page = getPage(message.getChatId(), currentPage);
 
         if (!checkPage(page, message.getChatId(), message.getMessageId())) {
             return;
         }
 
-
         editPageMessage(pId, page, nextPage, message);
-
     }
 
     private boolean checkPage(Page<ProjectEntity> page, Long chatId, Integer messageId) {
@@ -659,12 +634,10 @@ public class ProjectPagingService {
         sendMessage.setReplyMarkup(inlineButtonService.getAddAndCancelMarkup("/" + profile.getUserId() + "/" + project.getId(), creator.getLanguageCode()));
         sendingService.sendMessage(sendMessage);
 
-
         DeleteMessage deleteMessage = new DeleteMessage();
         deleteMessage.setChatId(message.getChatId());
         deleteMessage.setMessageId(message.getMessageId());
         sendingService.sendMessage(deleteMessage);
-
 
         ProjectProfileEntity projectProfile = new ProjectProfileEntity();
         projectProfile.setProjectId(project.getId());
@@ -677,24 +650,10 @@ public class ProjectPagingService {
         sendMessage.setChatId(message.getChatId());
         sendMessage.setText(sentenceService.getSentence(SentenceKey.JOIN_REQUEST, profile.getLanguageCode()));
         sendingService.sendMessage(sendMessage);
-
-        //
-//        List<ProfileEntity> partnerList = project.getPartnerList();
-//        partnerList.add(profile);
-//        project.setPartnerList(partnerList);
-//        projectRepository.save(project);
-//
-//        DeleteMessage deleteMessage = new DeleteMessage();
-//        deleteMessage.setChatId(message.getChatId());
-//        deleteMessage.setMessageId(message.getMessageId());
-//        sendingService.sendMessage(deleteMessage);
-//
-//        getProjectPage(message.getChatId());
     }
 
 
     public void getJoinedProjectPage(Long chatId) {
-
         Page<ProjectEntity> page = getJoinedPage(chatId, 0);
         String languageCode = profileService.getLanguageCode(chatId);
 
@@ -744,7 +703,6 @@ public class ProjectPagingService {
     }
 
     public void toJoinPrevPage(String data, CallbackQuery callbackQuery) {
-
         String[] split = data.split("/");
         Integer pId = Integer.valueOf(split[3]);
         int currentPage = Integer.parseInt(split[2]);
@@ -781,7 +739,6 @@ public class ProjectPagingService {
     }
 
     public void backForConnect(String data, CallbackQuery callbackQuery) {
-
         String[] split = data.split("/");
         int currentPage = Integer.parseInt(split[2]);
         Message message = callbackQuery.getMessage();
@@ -806,13 +763,12 @@ public class ProjectPagingService {
             String languageCode = project.getProfile().getLanguageCode();
             editMarkup = getMyEditMarkup(project.getId(), languageCode, page.getTotalPages(), currentPage);
         }
+
         EditMessageReplyMarkup editMessageReplyMarkup = new EditMessageReplyMarkup();
         editMessageReplyMarkup.setMessageId(message.getMessageId());
         editMessageReplyMarkup.setChatId(message.getChatId());
         editMessageReplyMarkup.setReplyMarkup(editMarkup);
         sendingService.sendMessage(editMessageReplyMarkup);
-
-
     }
 
     public void addToProject(String data, CallbackQuery callbackQuery) {
@@ -825,6 +781,7 @@ public class ProjectPagingService {
         if (optional.isEmpty()) {
             return;
         }
+
         ProjectEntity project = optional.get();
 
         ProfileEntity profile = profileService.getByUserId(userId);
@@ -836,18 +793,15 @@ public class ProjectPagingService {
         project.setPartnerList(partnerList);
         projectRepository.save(project);
 
-
         SendMessage sendMessage = new SendMessage();
         sendMessage.setText(sentenceService.getSentence(SentenceKey.JOIN_REQUEST_ACCEPTED, profile.getLanguageCode()));
         sendMessage.setChatId(profile.getUserId());
         sendingService.sendMessage(sendMessage);
 
-
         DeleteMessage deleteMessage = new DeleteMessage();
         deleteMessage.setChatId(message.getChatId());
         deleteMessage.setMessageId(message.getMessageId());
         sendingService.sendMessage(deleteMessage);
-
     }
 
     public void rejectJoinProject(String data, CallbackQuery callbackQuery) {
@@ -871,12 +825,10 @@ public class ProjectPagingService {
         sendMessage.setChatId(profile.getUserId());
         sendingService.sendMessage(sendMessage);
 
-
         DeleteMessage deleteMessage = new DeleteMessage();
         deleteMessage.setChatId(message.getChatId());
         deleteMessage.setMessageId(message.getMessageId());
         sendingService.sendMessage(deleteMessage);
-
     }
 }
 

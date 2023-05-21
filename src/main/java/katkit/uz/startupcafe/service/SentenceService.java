@@ -13,9 +13,7 @@ import java.util.Set;
 
 @Service
 public class SentenceService {
-
     private final Map<SentenceKey, SentenceDTO> sentenceMap = new HashMap<>();
-
     private final Map<ButtonKey, SentenceDTO> buttonMap = new HashMap<>();
 
     public String getSentence(SentenceKey key, String languageCode) {
@@ -59,10 +57,8 @@ public class SentenceService {
     @Bean
     CommandLineRunner commandLineRunner() {
         return args -> {
-
             initializeSentence();
             initializeButtonText();
-
         };
     }
 
@@ -74,7 +70,6 @@ public class SentenceService {
         );
         sentenceMap.put(SentenceKey.START, start);
 
-
         SentenceDTO restart = new SentenceDTO(
                 "Botni qayta ishga tushirganingizdan xursandmiz\uD83C\uDF89",
                 "Рад, что вы перезапустили бота\uD83C\uDF89",
@@ -82,14 +77,12 @@ public class SentenceService {
         );
         sentenceMap.put(SentenceKey.RESTART, restart);
 
-
         SentenceDTO help = new SentenceDTO(
                 "Bu bot Katkit jamoasiga tegishli \nBatafsil ma'lumot uchun @katkituz",
                 "Этот бот принадлежит команде Katkit \nДля получения дополнительной информации @katkituz",
                 "This bot belongs to the Katkit team\nFor more information @katkituz"
         );
         sentenceMap.put(SentenceKey.HELP, help);
-
 
         SentenceDTO language = new SentenceDTO(
                 "*Joriy til* _%s_ \nTilni o'zgartirish uchun \nquyidagilardan birini tanlang",
@@ -104,7 +97,6 @@ public class SentenceService {
                 "Check ✅"
         );
         sentenceMap.put(SentenceKey.CHECK, check);
-
 
         SentenceDTO subscribe = new SentenceDTO(
                 "Quyidagi chatlarga obuna bo'ling",
@@ -147,7 +139,6 @@ public class SentenceService {
                 "*Enter a brief description of yourself \n Example:* \n_I am a Backend developer_"
         );
         sentenceMap.put(SentenceKey.REQUEST_BIO, bio);
-
 
         SentenceDTO name = new SentenceDTO(
                 "Ism va Familya",
@@ -457,8 +448,6 @@ public class SentenceService {
                 "Send the post"
         );
         sentenceMap.put(SentenceKey.POST_REQUEST, postRequest);
-
-
     }
 
 
@@ -487,7 +476,6 @@ public class SentenceService {
                 "\uD83D\uDC64 Profile");
         buttonMap.put(ButtonKey.PROFILE, profile);
 
-
         SentenceDTO signUp = new SentenceDTO(
                 "\uD83D\uDC64 Ro'yxatdan o'tish",
                 "\uD83D\uDC64 Зарегистрироваться",
@@ -499,7 +487,6 @@ public class SentenceService {
                 "↪️Назад",
                 "↪️Back");
         buttonMap.put(ButtonKey.BACK, back);
-
 
         SentenceDTO home = new SentenceDTO(
                 "\uD83C\uDFD8 Bosh sahifaga",
@@ -561,19 +548,18 @@ public class SentenceService {
                 "Skip");
         buttonMap.put(ButtonKey.SKIP, skip);
 
-
         SentenceDTO cancel = new SentenceDTO(
                 "Bekor qilish",
                 "Отменить",
                 "Cancel");
         buttonMap.put(ButtonKey.CANCEL, cancel);
 
-
         SentenceDTO myProject = new SentenceDTO(
                 "Loyihalarim",
                 "Мои проекты",
                 "My projects");
         buttonMap.put(ButtonKey.MY_PROJECT, myProject);
+
         SentenceDTO office = new SentenceDTO(
                 "Idora",
                 "Офис",
@@ -605,8 +591,6 @@ public class SentenceService {
                 "Create a post"
         );
         buttonMap.put(ButtonKey.POST_CREATE, postCreate);
-
-
     }
 
 }

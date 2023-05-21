@@ -41,8 +41,6 @@ public class PostService {
             sendMessage.setChatId(user.getUserId());
             sendingService.sendMessage(sendMessage);
         });
-
-
     }
 
     public void sendPhoto(List<PhotoSize> photo, String caption) {
@@ -85,7 +83,6 @@ public class PostService {
         sendPoll.setType(poll.getType());
         sendPoll.setAllowMultipleAnswers(poll.getAllowMultipleAnswers());
 
-
         List<String> options = new ArrayList<>();
         List<PollOption> pollOptions = poll.getOptions();
         pollOptions.forEach(pollOption -> {
@@ -107,7 +104,6 @@ public class PostService {
         ForwardMessage forwardMessage = new ForwardMessage();
         forwardMessage.setMessageId(message.getMessageId());
         forwardMessage.setFromChatId(message.getChatId());
-
 
         List<ProfileEntity> userList = profileService.getUserList();
 
@@ -141,7 +137,6 @@ public class PostService {
             sendAudio.setChatId(user.getUserId());
             sendingService.sendMessage(sendAudio);
         });
-
     }
 
     public void sendVoice(Voice voice, String caption) {
@@ -165,7 +160,6 @@ public class PostService {
         sendAnimation.setCaption(caption);
         sendAnimation.setAnimation(new InputFile(animation.getFileId()));
 
-
         List<ProfileEntity> userList = profileService.getUserList();
 
         userList.forEach(user -> {
@@ -178,7 +172,6 @@ public class PostService {
         SendDocument sendDocument = new SendDocument();
         sendDocument.setCaption(caption);
         sendDocument.setDocument(new InputFile(document.getFileId()));
-
 
         List<ProfileEntity> userList = profileService.getUserList();
 
@@ -197,18 +190,15 @@ public class PostService {
         sendLocation.setHorizontalAccuracy(location.getHorizontalAccuracy());
         sendLocation.setProximityAlertRadius(location.getProximityAlertRadius());
 
-
         List<ProfileEntity> userList = profileService.getUserList();
 
         userList.forEach(user -> {
             sendLocation.setChatId(user.getUserId());
             sendingService.sendMessage(sendLocation);
         });
-
     }
 
     public void send(Message message) {
-
         ForwardMessage forwardMessage = new ForwardMessage();
         forwardMessage.setFromChatId(message.getChatId());
         forwardMessage.setMessageId(message.getMessageId());
@@ -219,6 +209,5 @@ public class PostService {
             forwardMessage.setChatId(user.getUserId());
             sendingService.sendMessage(forwardMessage);
         });
-
     }
 }

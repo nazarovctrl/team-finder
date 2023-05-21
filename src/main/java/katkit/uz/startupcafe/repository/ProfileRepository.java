@@ -11,9 +11,7 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer> {
-
     boolean existsByUserId(Long userId);
-
 
     @Query("SELECT languageCode FROM ProfileEntity " +
             "WHERE userId=?1")
@@ -33,7 +31,6 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
             "WHERE userId=?1")
     Integer getIdByUserId(Long userId);
 
-
     @Query("SELECT step FROM ProfileEntity " +
             "WHERE userId=?1")
     Step getStepByUserId(Long userId);
@@ -52,7 +49,6 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
             "WHERE  userId=?1 ")
     void changeVisibleByUserId(Long userId, boolean visible);
 
-
     @Modifying
     @Transactional
     @Query("UPDATE ProfileEntity " +
@@ -67,7 +63,6 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
             "WHERE userId=?1")
     void changePhoneNumber(Long userId, String phoneNumber);
 
-
     @Modifying
     @Transactional
     @Query("UPDATE ProfileEntity " +
@@ -76,7 +71,6 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
     void changeBIOByUserId(Long userId, String text);
 
     ProfileEntity findByUserId(Long userId);
-
 
     @Modifying
     @Transactional
@@ -102,7 +96,6 @@ public interface ProfileRepository extends CrudRepository<ProfileEntity, Integer
     @Query("select count(p) from ProfileEntity as p " +
             "where p.visible=true ")
     int getUserCount();
-
 
     List<ProfileEntity> findByVisible(Boolean visible);
 }

@@ -44,7 +44,6 @@ public class ProjectService {
     }
 
     public void toCreateProject(Long chatId) {
-
         profileService.changeStep(chatId, Step.PROJECT_CREATE);
         String languageCode = profileService.getLanguageCode(chatId);
 
@@ -56,7 +55,6 @@ public class ProjectService {
     }
 
     public void findProject(Long chatId) {
-
         String languageCode = profileService.getLanguageCode(chatId);
 
         SendMessage sendMessage = new SendMessage();
@@ -66,11 +64,9 @@ public class ProjectService {
 
         sendingService.sendMessage(sendMessage);
         profileService.changeStep(chatId, PROJECT_FIND);
-
     }
 
     public void createProject(Long chatId, String title) {
-
         ProjectEntity project = new ProjectEntity();
         project.setTitle(title);
         project.setProfileId(profileService.getId(chatId));
@@ -91,9 +87,7 @@ public class ProjectService {
         sendMessage.setReplyMarkup(buttonService.getBackAndHomeMarkup(languageCode));
 
         sendingService.sendMessage(sendMessage);
-
         profileService.changeStep(chatId, Step.PROJECT_CREATE_DESCRIPTION);
-
     }
 
     public void setDescription(Long chatId, String description) {
@@ -111,11 +105,11 @@ public class ProjectService {
 
         sendingService.sendMessage(sendMessage);
         profileService.changeStep(chatId, Step.PROJECT_CREATE_ATTACH);
-
     }
 
     public String getInformation(String languageCode, ProjectEntity project) {
         String technologies;
+
         if (project.getTechnologies() == null) {
             technologies = sentenceService.getSentence(SentenceKey.TECHNOLOGIES_NULL, languageCode);
         } else {
@@ -125,11 +119,11 @@ public class ProjectService {
         String sentence = sentenceService.getSentence(SentenceKey.PROJECT_CREATE_INFORMATION, languageCode);
 
         return String.format(sentence, project.getId(), project.getTitle(), project.getDescription(), technologies);
-
     }
 
     public String getInformationForChannel(String languageCode, ProjectEntity project) {
         String technologies;
+
         if (project.getTechnologies() == null) {
             technologies = sentenceService.getSentence(SentenceKey.TECHNOLOGIES_NULL, languageCode);
         } else {
@@ -137,9 +131,7 @@ public class ProjectService {
         }
 
         String sentence = sentenceService.getSentence(SentenceKey.PROJECT_INFORMATION, languageCode);
-
         return String.format(sentence, project.getId(), project.getTitle(), project.getDescription(), technologies, project.getProfile().getUserId(), project.getProfile().getName());
-
     }
 
     private void sendInfo(Long chatId, String languageCode, ProjectEntity project, InlineKeyboardMarkup markup) {
@@ -169,7 +161,6 @@ public class ProjectService {
             sendMessage.setChatId(chat.getChatId());
             sendingService.sendMessage(sendMessage);
         });
-
     }
 
     private void sendInfWithPhotoAfterJoin(Long chatId, String languageCode, ProjectEntity project, AttachEntity attach, InlineKeyboardMarkup markup) {
@@ -279,12 +270,10 @@ public class ProjectService {
 
         sendingService.sendMessage(sendMessage);
         profileService.changeStep(chatId, Step.PROJECT_CREATE_CONFIRM);
-
     }
 
     public void cancelProject(Long chatId) {
         String languageCode = profileService.getLanguageCode(chatId);
-
 
         ProjectEntity first = projectRepository.findFirstByProfileUserIdOrderByCreatedDateDesc(chatId);
         projectRepository.delete(first);
@@ -312,7 +301,6 @@ public class ProjectService {
         profileService.changeStep(chatId, Step.OFFICE);
 
         sendProjectInformationToChannel(project, languageCode);
-
     }
 
     public void requestTechnologies(Long chatId) {
@@ -326,7 +314,6 @@ public class ProjectService {
         sendingService.sendMessage(sendMessage);
 
         profileService.changeStep(chatId, Step.PROJECT_CREATE_TECHNOLOGIES);
-
     }
 
     public void setTechnologies(Long chatId, String technologies) {
@@ -376,7 +363,6 @@ public class ProjectService {
             markup = inlineButtonService.getJoinMarkup("/join/" + 0 + "/" + project.getId(), languageCode);
         }
         sendProjectInformation(optional.get(), chatId, languageCode, markup);
-
     }
 
 
@@ -392,6 +378,5 @@ public class ProjectService {
             case PHOTO -> sendInfWithPhotoAfterJoin(chatId, languageCode, project, attach, markup);
             case VIDEO -> sendInfWithVideoAfterJoin(chatId, languageCode, project, attach, markup);
         }
-
     }
 }

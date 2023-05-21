@@ -8,10 +8,8 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 @Service
 public class OfficeService {
-
     private final SentenceService sentenceService;
     private final ButtonService buttonService;
-
     private final ProfileService profileService;
     private final SendingService sendingService;
 
@@ -23,7 +21,6 @@ public class OfficeService {
     }
 
     public void sendRegister(Long chatId) {
-
         String languageCode = profileService.getLanguageCode(chatId);
         SendMessage sendMessage = new SendMessage();
         sendMessage.setChatId(chatId);
@@ -33,8 +30,8 @@ public class OfficeService {
     }
 
     public void toOffice(Long chatId) {
-
         boolean registered = profileService.isRegistered(chatId);
+
         if (!registered) {
             sendRegister(chatId);
             return;
@@ -48,7 +45,6 @@ public class OfficeService {
         sendMessage.setReplyMarkup(buttonService.getOfficeMarkup(languageCode));
 
         sendingService.sendMessage(sendMessage);
-
         profileService.changeStep(chatId, Step.OFFICE);
     }
 }

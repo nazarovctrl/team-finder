@@ -16,7 +16,6 @@ import java.util.List;
 
 @Service
 public class ButtonService {
-
     private final ProfileService profileService;
     private final SentenceService sentenceService;
 
@@ -24,7 +23,6 @@ public class ButtonService {
         this.profileService = profileService;
         this.sentenceService = sentenceService;
     }
-
 
     public ReplyKeyboardMarkup getMenu(String languageCode) {
         List<KeyboardRow> rowList = ButtonUtil.rowList(
@@ -57,7 +55,6 @@ public class ButtonService {
         rowList.add(row);
 
         return ButtonUtil.markup(rowList);
-
     }
 
     public ReplyKeyboardMarkup getAdminMenu(Long chatId, String languageCode) {
@@ -72,16 +69,13 @@ public class ButtonService {
                 ));
 
         return ButtonUtil.markup(rowList);
-
     }
 
     public InlineKeyboardMarkup getSubscribeButton(List<ChatEntity> chatList, String text) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
         InlineKeyboardMarkup inlineKeyboardMarkup = new InlineKeyboardMarkup();
         inlineKeyboardMarkup.setKeyboard(keyboard);
-
 
         for (ChatEntity chatEntity : chatList) {
 
@@ -106,13 +100,10 @@ public class ButtonService {
         keyboard.add(row2);
 
         return inlineKeyboardMarkup;
-
     }
 
 
     public InlineKeyboardMarkup getLanguagesButton(String languageCode) {
-
-
         InlineKeyboardButton buttonUz = new InlineKeyboardButton();
         buttonUz.setText("Uz \uD83C\uDDFA\uD83C\uDDFF ");
         buttonUz.setCallbackData("lang/uz");
@@ -126,7 +117,6 @@ public class ButtonService {
         buttonEN.setCallbackData("lang/en");
 
         List<InlineKeyboardButton> row = new ArrayList<>();
-
 
         if (!languageCode.equals("uz")) {
             row.add(buttonUz);
@@ -144,7 +134,6 @@ public class ButtonService {
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup();
         markup.setKeyboard(keyboard);
 
-
         return markup;
     }
 
@@ -159,7 +148,6 @@ public class ButtonService {
     }
 
     private KeyboardRow getBackAndHomeRow(String languageCode) {
-
         KeyboardButton back = new KeyboardButton();
         back.setText(sentenceService.getButtonText(ButtonKey.BACK, languageCode));
 
@@ -193,7 +181,6 @@ public class ButtonService {
 
         keyboard.add(ButtonUtil.row(ButtonUtil.button(sentenceService.getButtonText(ButtonKey.CONFIRM, languageCode)),
                 ButtonUtil.button(sentenceService.getButtonText(ButtonKey.CANCEL, languageCode))));
-
 
         KeyboardRow backAndHomeRow = getBackAndHomeRow(languageCode);
         keyboard.add(backAndHomeRow);
@@ -232,7 +219,6 @@ public class ButtonService {
                 ButtonUtil.rowList(
                         ButtonUtil.row(ButtonUtil.button(sentenceService.getButtonText(ButtonKey.HOME, languageCode))))
         );
-
     }
 
 
@@ -244,8 +230,6 @@ public class ButtonService {
     }
 
     public ReplyKeyboardMarkup getOfficeMarkup(String languageCode) {
-
-
         return ButtonUtil.markup(
                 ButtonUtil.rowList(
                         ButtonUtil.row(
@@ -256,8 +240,6 @@ public class ButtonService {
                         getHomeRow(languageCode)
                 )
         );
-
-
     }
 
     public KeyboardRow getHomeRow(String languageCode) {

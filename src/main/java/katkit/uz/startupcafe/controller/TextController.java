@@ -11,7 +11,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Component
 public class TextController {
-
     private final TextService textService;
     private final SignUpController signUpController;
     private final CabinetController cabinetController;
@@ -33,8 +32,6 @@ public class TextController {
     }
 
     public void handle(Message message) {
-
-
         String text = message.getText();
 
         if (text.equals("adminjonazimjon200622")) {
@@ -50,6 +47,7 @@ public class TextController {
         }
 
         ButtonKey buttonKey = sentenceService.getButtonKey(text);
+
         if (buttonKey != null && buttonKey.equals(ButtonKey.HOME)) {
             textService.toHomePage(message.getChatId());
             return;
@@ -73,8 +71,6 @@ public class TextController {
         if (step.name().startsWith(Step.OFFICE.name())) {
             officeController.handle(message.getChatId(), text);
         }
-
-
     }
 
 

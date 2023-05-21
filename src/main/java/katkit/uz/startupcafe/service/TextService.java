@@ -11,12 +11,9 @@ import org.telegram.telegrambots.meta.api.objects.InputFile;
 
 @Service
 public class TextService {
-
     private final SendingService sendingService;
-
     private final ProfileService profileService;
     private final SentenceService sentenceService;
-
     private final ButtonService buttonService;
 
     public TextService(SendingService sendingService, ProfileService profileService, SentenceService sentenceService, ButtonService buttonService) {
@@ -39,7 +36,6 @@ public class TextService {
 
         sendMessage.setText(String.format(sentence, name));
         sendingService.sendMessage(sendMessage);
-
     }
 
     public void toHomePage(Long chatId) {
@@ -55,7 +51,6 @@ public class TextService {
 
         sendMessage.setText(sentence);
         sendingService.sendMessage(sendMessage);
-
     }
 
 

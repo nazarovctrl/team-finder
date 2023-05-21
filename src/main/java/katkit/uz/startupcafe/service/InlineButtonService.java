@@ -14,13 +14,10 @@ import java.util.List;
 
 @Service
 public class InlineButtonService {
-
     private final SentenceService sentenceService;
-
     public InlineButtonService(SentenceService sentenceService) {
         this.sentenceService = sentenceService;
     }
-
     public InlineKeyboardButton getBack(String callback) {
         InlineKeyboardButton button = new InlineKeyboardButton();
         button.setText("◀️◀️");
@@ -51,7 +48,6 @@ public class InlineButtonService {
 
     public InlineKeyboardButton getJoin(String callback, String languageCode) {
         InlineKeyboardButton delete = new InlineKeyboardButton();
-
         delete.setText(sentenceService.getSentence(SentenceKey.JOIN, languageCode));
         delete.setCallbackData("join" + callback);
         return delete;
@@ -150,7 +146,6 @@ public class InlineButtonService {
     }
 
     public InlineKeyboardMarkup getBackMarkup(String callback, Integer currantPage, Integer allPage) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup(keyboard);
@@ -161,7 +156,6 @@ public class InlineButtonService {
     }
 
     public InlineKeyboardMarkup getNextMarkup(String callback, Integer currantPage, Integer allPage) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
 
         InlineKeyboardMarkup markup = new InlineKeyboardMarkup(keyboard);
@@ -180,7 +174,6 @@ public class InlineButtonService {
 
 
     public InlineKeyboardMarkup getDeleteBackAndNextMarkup(String callback, Integer currantPage, Integer allPage, String languageCode) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(getDeleteRow(callback, languageCode));
         keyboard.add(getBackAndNextRow(callback, currantPage, allPage));
@@ -189,7 +182,6 @@ public class InlineButtonService {
     }
 
     public InlineKeyboardMarkup getConnectDeleteBackAndNextMarkup(String callback, Integer currantPage, Integer allPage, String languageCode) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(getConnectRow(callback, languageCode));
         keyboard.add(getDeleteRow(callback, languageCode));
@@ -199,9 +191,7 @@ public class InlineButtonService {
     }
 
     public InlineKeyboardMarkup getDeleteAndBackMarkup(String callback, Integer currantPage, Integer allPage, String languageCode) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-
         keyboard.add(getDeleteRow(callback, languageCode));
         keyboard.add(getBackRow(callback, currantPage, allPage));
 
@@ -209,7 +199,6 @@ public class InlineButtonService {
     }
 
     public InlineKeyboardMarkup getConnectDeleteAndBackMarkup(String callback, Integer currantPage, Integer allPage, String languageCode) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(getConnectRow(callback, languageCode));
         keyboard.add(getDeleteRow(callback, languageCode));
@@ -219,7 +208,6 @@ public class InlineButtonService {
     }
 
     public InlineKeyboardMarkup getDeleteAndNextMarkup(String callback, Integer currantPage, Integer allPage, String languageCode) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(getDeleteRow(callback, languageCode));
         keyboard.add(getNextRow(callback, currantPage, allPage));
@@ -227,7 +215,6 @@ public class InlineButtonService {
     }
 
     public InlineKeyboardMarkup getConnectDeleteAndNextMarkup(String callback, Integer currantPage, Integer allPage, String languageCode) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(getConnectRow(callback, languageCode));
         keyboard.add(getDeleteRow(callback, languageCode));
@@ -236,7 +223,6 @@ public class InlineButtonService {
     }
 
     public InlineKeyboardMarkup getDeleteMarkup(String callback, String languageCode) {
-
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(getDeleteRow(callback, languageCode));
         return new InlineKeyboardMarkup(keyboard);
@@ -294,7 +280,6 @@ public class InlineButtonService {
         List<InlineKeyboardButton> row = new ArrayList<>();
         row.add(button);
         return row;
-
     }
 
     public InlineKeyboardMarkup getConfirmAndCancelMarkup(String callback, String languageCode) {
@@ -308,22 +293,15 @@ public class InlineButtonService {
         keyboard.add(getJoinRow(callback, languageCode));
         keyboard.add(getCurrentRow(currentPage, allPage));
         return new InlineKeyboardMarkup(keyboard);
-
     }
 
-//    public InlineKeyboardMarkup getCurrentMarkup(Integer currentPage, Integer allPage) {
-//        List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
-//        keyboard.add(getCurrentRow(currentPage, allPage));
-//        return new InlineKeyboardMarkup(keyboard);
-//
-//    }
+
 
     public InlineKeyboardMarkup getJoinAndNextMarkup(String callback, Integer currentPage, Integer allPage, String languageCode) {
         List<List<InlineKeyboardButton>> keyboard = new ArrayList<>();
         keyboard.add(getJoinRow(callback, languageCode));
         keyboard.add(getNextRow(callback, currentPage, allPage));
         return new InlineKeyboardMarkup(keyboard);
-
     }
 
 
@@ -379,7 +357,6 @@ public class InlineButtonService {
         keyboard.add(getBackRowForConnect(callback, languageCode));
 
         return new InlineKeyboardMarkup(keyboard);
-
     }
 
     private List<InlineKeyboardButton> getBackRowForConnect(String callback, String languageCode) {

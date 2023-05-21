@@ -20,7 +20,6 @@ import java.util.function.Predicate;
 
 @Service
 public class ProfileChatService {
-
     private final ChatService chatService;
     private final SendingService sendingService;
     private final ProfileService profileService;
@@ -44,7 +43,6 @@ public class ProfileChatService {
         }
 
         String languageCode = profileService.getLanguageCode(userId);
-
         InlineKeyboardMarkup markup = buttonService.getSubscribeButton(unSubscribedChatList, sentenceService.getSentence(SentenceKey.CHECK, languageCode));
 
         SendMessage sendMessage = new SendMessage();
@@ -58,7 +56,6 @@ public class ProfileChatService {
 
 
     private List<ChatEntity> getUnSubscribedChatList(Long userId) {
-
         List<ChatEntity> unSubscribedChatList = chatService.getChatList(true, ChatStatus.ACTIVE, ChatRole.ADMINISTRATOR);
 
         Predicate<ChatEntity> predicate = (chatEntity) -> {
@@ -68,13 +65,11 @@ public class ProfileChatService {
             return role != ChatRole.MEMBER && role != ChatRole.ADMINISTRATOR && role != ChatRole.CREATOR;
         };
 
-
         unSubscribedChatList = unSubscribedChatList.stream().filter(predicate).toList();
         return unSubscribedChatList;
     }
 
     public void checkSubscription(Long userId, Integer messageId) {
-
         List<ChatEntity> unSubscribedChatList = getUnSubscribedChatList(userId);
         if (unSubscribedChatList.isEmpty()) {
             DeleteMessage deleteMessage = new DeleteMessage();
@@ -85,19 +80,16 @@ public class ProfileChatService {
         }
 
         String languageCode = profileService.getLanguageCode(userId);
-
         InlineKeyboardMarkup markup = buttonService.getSubscribeButton(unSubscribedChatList, sentenceService.getSentence(SentenceKey.CHECK, languageCode));
-
 
         EditMessageText editMessageText = new EditMessageText();
         editMessageText.setText(sentenceService.getSentence(SentenceKey.SUBSCRIBE, languageCode) + "\n"
                 + LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm")));
-
         editMessageText.setReplyMarkup(markup);
         editMessageText.setChatId(userId);
         editMessageText.setMessageId(messageId);
-        sendingService.sendMessage(editMessageText);
 
+        sendingService.sendMessage(editMessageText);
     }
 
 

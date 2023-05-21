@@ -12,7 +12,6 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 
 @Component
 public class SignUpController {
-
     private final SignUpService signUpService;
     private final ProfileService profileService;
     private final SentenceService sentenceService;
@@ -21,9 +20,7 @@ public class SignUpController {
         this.signUpService = signUpService;
         this.profileService = profileService;
         this.sentenceService = sentenceService;
-
     }
-
 
     public void handle(Long chatId, String text) {
         ButtonKey buttonKey = sentenceService.getButtonKey(text);
@@ -46,16 +43,12 @@ public class SignUpController {
         if (buttonKey != null && buttonKey.equals(ButtonKey.BACK)) {
             switch (step) {
                 case SIGN_UP_CONTACT -> signUpService.signUp(chatId);
-
                 case SIGN_UP_PROFESSION -> signUpService.requestContact(chatId);
-
                 case SIGN_UP_BIO -> signUpService.requestProfession(chatId);
-
                 case SIGN_UP_CONFIRM -> signUpService.requestBIO(chatId);
             }
             return;
         }
-
 
         switch (step) {
             case SIGN_UP_NAME -> {
@@ -71,9 +64,7 @@ public class SignUpController {
                 signUpService.signUpConfirm(chatId);
             }
         }
-
     }
-
 
     public void handleContact(Message message) {
         Contact contact = message.getContact();

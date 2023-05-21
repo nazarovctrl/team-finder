@@ -42,7 +42,6 @@ public class ProjectEntity {
     @Column
     private Boolean visible = true;
 
-
     @Column(name = "created_date")
     private LocalDateTime createdDate = LocalDateTime.now();
 

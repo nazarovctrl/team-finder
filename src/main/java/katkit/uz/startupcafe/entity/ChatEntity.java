@@ -15,7 +15,6 @@ import java.time.LocalDateTime;
 @Entity
 @Table(name = "chats")
 public class ChatEntity {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -25,7 +24,6 @@ public class ChatEntity {
 
     @Column
     private String username;
-
 
     @Enumerated(EnumType.STRING)
     @Column
@@ -37,7 +35,6 @@ public class ChatEntity {
 
     @Column
     private String title;
-
 
     @Column(name = "invite_link")
     private String inviteLink;

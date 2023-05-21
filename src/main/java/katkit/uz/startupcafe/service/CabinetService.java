@@ -9,7 +9,6 @@ import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 
 @Service
 public class CabinetService {
-
     private final ProfileService profileService;
     private final ButtonService buttonService;
     private final SentenceService sentenceService;
@@ -32,7 +31,6 @@ public class CabinetService {
         sendMessage.setReplyMarkup(buttonService.getCabinetMarkup(languageCode));
 
         sendingService.sendMessage(sendMessage);
-
     }
 
     public void toEditCabinet(Long chatId) {
@@ -45,7 +43,6 @@ public class CabinetService {
         sendMessage.setReplyMarkup(buttonService.getEditCabinetMarkup(languageCode));
 
         sendingService.sendMessage(sendMessage);
-
     }
 
     public void requestName(Long chatId) {
@@ -80,7 +77,6 @@ public class CabinetService {
         sendMessage.setText(sentenceService.getSentence(SentenceKey.REQUEST_BIO, languageCode));
 
         sendingService.sendMessage(sendMessage);
-
     }
 
     public void requestProfession(Long chatId) {
@@ -104,7 +100,6 @@ public class CabinetService {
         sendMessage.setReplyMarkup(buttonService.getEditCabinetMarkup(languageCode));
 
         sendingService.sendMessage(sendMessage);
-
     }
 
     public void changeName(Long chatId, String text) {
@@ -117,7 +112,6 @@ public class CabinetService {
         sendMessage.setChatId(chatId);
         sendMessage.setText(sentenceService.getSentence(SentenceKey.NAME_CHANGED, languageCode));
         sendingService.sendMessage(sendMessage);
-
     }
 
     public void changeBIO(Long chatId, String text) {
@@ -144,7 +138,6 @@ public class CabinetService {
     }
 
     public void sendInformation(Long chatId) {
-
         String informationByUserId = profileService.getInformationByUserId(chatId);
         SendMessage sendMessage = new SendMessage();
         sendMessage.setParseMode(ParseMode.MARKDOWN);

@@ -10,7 +10,6 @@ import java.util.List;
 
 
 public interface ProjectProfileRepository extends CrudRepository<ProjectProfileEntity, Integer>, PagingAndSortingRepository<ProjectProfileEntity, Integer> {
-
     @Modifying
     @Transactional
     int deleteByProjectIdAndProfileId(Integer projectId, Integer profileId);

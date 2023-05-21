@@ -11,15 +11,12 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface ChatsRepository extends CrudRepository<ChatEntity, Integer> {
-
     @Modifying
     @Transactional
     @Query("UPDATE ChatEntity SET role=?2 WHERE chatId=?1")
     void updateRole(Long chatId, ChatRole left);
 
-
     boolean existsByChatId(Long chatId);
-
 
     @Query("from ChatEntity " +
             "where visible=?1 and status=?2 and role=?3")
