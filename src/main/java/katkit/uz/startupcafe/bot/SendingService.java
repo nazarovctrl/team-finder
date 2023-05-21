@@ -1,9 +1,5 @@
-package katkit.uz.startupcafe.service.bot;
+package katkit.uz.startupcafe.bot;
 
-import katkit.uz.startupcafe.entity.ChatEntity;
-import katkit.uz.startupcafe.enums.ChatRole;
-import katkit.uz.startupcafe.enums.ChatStatus;
-import katkit.uz.startupcafe.service.ChatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ForwardMessage;
@@ -15,18 +11,11 @@ import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.chatmember.ChatMember;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
-import java.util.List;
-
 @Service
 @Slf4j
 public class SendingService {
 
-    private final ChatService chatService;
     private TelegramBot telegramBot;
-
-    public SendingService(ChatService chatService) {
-        this.chatService = chatService;
-    }
 
     public void setTelegramBot(TelegramBot telegramBot) {
         this.telegramBot = telegramBot;

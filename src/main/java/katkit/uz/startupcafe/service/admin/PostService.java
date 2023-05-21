@@ -1,12 +1,12 @@
 package katkit.uz.startupcafe.service.admin;
 
+import katkit.uz.startupcafe.bot.SendingService;
 import katkit.uz.startupcafe.entity.ChatEntity;
 import katkit.uz.startupcafe.entity.ProfileEntity;
 import katkit.uz.startupcafe.enums.ChatRole;
 import katkit.uz.startupcafe.enums.ChatStatus;
 import katkit.uz.startupcafe.service.ChatService;
 import katkit.uz.startupcafe.service.ProfileService;
-import katkit.uz.startupcafe.service.bot.SendingService;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ForwardMessage;
 import org.telegram.telegrambots.meta.api.methods.polls.SendPoll;

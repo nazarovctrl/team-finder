@@ -1,5 +1,6 @@
 package katkit.uz.startupcafe.service.admin;
 
+import katkit.uz.startupcafe.bot.SendingService;
 import katkit.uz.startupcafe.enums.ProjectStatus;
 import katkit.uz.startupcafe.enums.SentenceKey;
 import katkit.uz.startupcafe.enums.Step;
@@ -8,7 +9,6 @@ import katkit.uz.startupcafe.repository.ProjectRepository;
 import katkit.uz.startupcafe.service.ButtonService;
 import katkit.uz.startupcafe.service.ProfileService;
 import katkit.uz.startupcafe.service.SentenceService;
-import katkit.uz.startupcafe.service.bot.SendingService;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

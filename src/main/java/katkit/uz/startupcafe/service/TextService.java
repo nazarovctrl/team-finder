@@ -1,11 +1,8 @@
 package katkit.uz.startupcafe.service;
 
+import katkit.uz.startupcafe.bot.SendingService;
 import katkit.uz.startupcafe.enums.SentenceKey;
 import katkit.uz.startupcafe.enums.Step;
-import katkit.uz.startupcafe.service.ButtonService;
-import katkit.uz.startupcafe.service.ProfileService;
-import katkit.uz.startupcafe.service.SentenceService;
-import katkit.uz.startupcafe.service.bot.SendingService;
 import org.springframework.stereotype.Service;
 import org.telegram.telegrambots.meta.api.methods.ParseMode;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
@@ -46,8 +43,6 @@ public class TextService {
     }
 
     public void toHomePage(Long chatId) {
-
-
         profileService.changeStep(chatId, Step.MAIN);
 
         SendMessage sendMessage = new SendMessage();
@@ -80,7 +75,6 @@ public class TextService {
     public void help(Long chatId) {
         SendPhoto sendPhoto = new SendPhoto();
         sendPhoto.setChatId(chatId);
-
 
         InputFile inputFile = new InputFile();
         inputFile.setMedia("AgACAgIAAxkBAAIC_WQAATaX5NWNxD9nsePLI03rMS6yaAACRsIxG392-ErCzmiK73IKuQEAAwIAA3gAAy4E");

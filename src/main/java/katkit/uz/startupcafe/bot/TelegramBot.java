@@ -1,4 +1,4 @@
-package katkit.uz.startupcafe.service.bot;
+package katkit.uz.startupcafe.bot;
 
 import katkit.uz.startupcafe.config.BotConfig;
 import katkit.uz.startupcafe.controller.UpdateController;
@@ -12,7 +12,6 @@ import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.commands.BotCommand;
 import org.telegram.telegrambots.meta.api.objects.commands.scope.BotCommandScopeDefault;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
-
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,7 +40,7 @@ public class TelegramBot extends TelegramLongPollingBot {
         }
     }
 
-    @Bean(name = "c")
+    @Bean(name = "sending")
     CommandLineRunner commandLineRunner(SendingService sendingService) {
         return args -> {
             sendingService.setTelegramBot(this);

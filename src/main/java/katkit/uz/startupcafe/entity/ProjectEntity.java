@@ -2,7 +2,9 @@ package katkit.uz.startupcafe.entity;
 
 import jakarta.persistence.*;
 import katkit.uz.startupcafe.enums.ProjectStatus;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;

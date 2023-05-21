@@ -6,7 +6,6 @@ import katkit.uz.startupcafe.service.OfficeService;
 import katkit.uz.startupcafe.service.ProfileService;
 import katkit.uz.startupcafe.service.ProjectService;
 import katkit.uz.startupcafe.service.SentenceService;
-
 import org.springframework.stereotype.Component;
 
 @Component

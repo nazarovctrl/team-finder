@@ -1,8 +1,6 @@
 package katkit.uz.startupcafe.entity;
 
 import jakarta.persistence.*;
-import katkit.uz.startupcafe.entity.ProfileEntity;
-import katkit.uz.startupcafe.entity.ProjectEntity;
 import katkit.uz.startupcafe.enums.AttachType;
 import lombok.Getter;
 import lombok.Setter;

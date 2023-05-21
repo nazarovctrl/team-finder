@@ -6,7 +6,6 @@ import katkit.uz.startupcafe.enums.ChatStatus;
 import katkit.uz.startupcafe.enums.ChatType;
 import lombok.Getter;
 import lombok.Setter;
-import org.checkerframework.checker.units.qual.C;
 
 import java.time.LocalDateTime;
 

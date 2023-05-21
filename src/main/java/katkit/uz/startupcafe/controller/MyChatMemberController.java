@@ -1,5 +1,6 @@
 package katkit.uz.startupcafe.controller;
 
+import katkit.uz.startupcafe.bot.SendingService;
 import katkit.uz.startupcafe.entity.ChatEntity;
 import katkit.uz.startupcafe.enums.ChatRole;
 import katkit.uz.startupcafe.enums.ChatType;
@@ -7,7 +8,6 @@ import katkit.uz.startupcafe.enums.SentenceKey;
 import katkit.uz.startupcafe.service.ChatService;
 import katkit.uz.startupcafe.service.ProfileService;
 import katkit.uz.startupcafe.service.SentenceService;
-import katkit.uz.startupcafe.service.bot.SendingService;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;

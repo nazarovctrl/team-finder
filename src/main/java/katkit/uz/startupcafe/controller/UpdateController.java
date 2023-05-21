@@ -33,9 +33,6 @@ public class UpdateController {
             myChatMemberController.handle(update.getMyChatMember());
         }
 
-
-
-
     }
 
 }

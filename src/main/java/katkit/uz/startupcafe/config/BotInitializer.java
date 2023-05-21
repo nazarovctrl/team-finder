@@ -1,6 +1,6 @@
 package katkit.uz.startupcafe.config;
 
-import katkit.uz.startupcafe.service.bot.TelegramBot;
+import katkit.uz.startupcafe.bot.TelegramBot;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.event.ContextRefreshedEvent;
 import org.springframework.context.event.EventListener;
@@ -13,7 +13,7 @@ import org.telegram.telegrambots.updatesreceivers.DefaultBotSession;
 @Slf4j
 @Component
 public class BotInitializer {
-   private final TelegramBot bot;
+    private final TelegramBot bot;
 
     public BotInitializer(TelegramBot bot) {
         this.bot = bot;
